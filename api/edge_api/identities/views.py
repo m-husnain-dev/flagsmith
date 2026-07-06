@@ -1,7 +1,7 @@
 import base64
 import json
 import typing
-from collections.abc import Mapping
+
 import pydantic
 from common.environments.permissions import (
     MANAGE_IDENTITIES,
@@ -177,9 +177,7 @@ class EdgeIdentityViewSet(
             raise TraitPersistenceError()
         edge_identity = self.get_object()
         if not isinstance(request.data, dict):
-         raise ValidationError(
-        "Expected a JSON object (dictionary) for trait data."
-    )
+            raise ValidationError("Expected a JSON object (dictionary) for trait data.")
         try:
             trait = TraitModel(**request.data)
         except pydantic.ValidationError as validation_error:
